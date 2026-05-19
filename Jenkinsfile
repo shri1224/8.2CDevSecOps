@@ -35,4 +35,30 @@ pipeline {
  }
 
  }
+
+ post {
+
+ always {
+
+ emailext (
+ subject: "Jenkins Build: ${currentBuild.currentResult}",
+
+ body: """
+ Build Status: ${currentBuild.currentResult}
+
+ Project: ${env.JOB_NAME}
+ Build Number: ${env.BUILD_NUMBER}
+
+ Check Jenkins for full details.
+ """,
+
+ to: "shrikantsk1224@gmail.com",
+
+ attachLog: true
+ )
+
+ }
+
+ }
+
 }
